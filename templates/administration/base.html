@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+
+{% load svg %}
+
+
+{% block navbar %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-2 bg-dark-theme">
+			<a class="navbar-brand m-t-10" href="#">
+				{% svg 'brand' %}
+			</a>
+		</div>
+		<div class="col-10">
+			<div class="row m-t-10">
+				<div class="col-6"></div>
+				<div class="col-5 text-right">
+					Hello, <strong>{{ request.user.get_full_name | default_if_none:request.user.email }}</strong>
+				</div>
+				<div class="col-1 text-left">
+					<a href="{% url 'logout' %}">
+						<i class="material-icons m-l-5 text-black">undo</i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="row">
+	<div class="col-2 gradient-dark" style="min-width: 50px;">
+		&nbsp;
+	</div>
+	<div class="col-10 gradient-light" style="min-width: 50px;">
+		&nbsp;
+	</div>
+</div>
+<div class="row">
+	{% block sidebar_wrapper %}
+	<nav class="col-md-2 col-lg-2 col-xl-2 d-none d-md-block bg-dark-theme sidebar">
+		{% block sidebar %}
+		<div class="sidebar-sticky">
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'administration:dashboard' %}">Dashboard</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'administration:shop-accounts-list' %}">Shops</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="#">Administrators</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="#">Statistics</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	{% endblock sidebar %}
+	{% endblock sidebar_wrapper %}
+
+	{% block main_content_wrapper %}
+	{% block main_content %}{% endblock main_content %}
+	{% endblock main_content_wrapper %}
+</div>
+{% endblock content %}

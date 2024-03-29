@@ -1,0 +1,19 @@
+{% extends "management/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block extrahead %}
+{{ search_form.media }}
+{% endblock %}
+
+
+{% block main_content %}
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 pt-3 px-4">
+	<a href="{% url 'management:payment-link-create' %}" class="btn btn-warning text-white">Create new payment link</a>
+	<div class="row">
+		<div class="col-12">
+			{% include "management/orders/includes/_orders_list.html" %}
+		</div>
+	</div>
+</main>
+{% endblock main_content %}

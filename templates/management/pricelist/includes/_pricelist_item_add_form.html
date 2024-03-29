@@ -1,0 +1,41 @@
+{% load bootstrap4 %}
+
+
+<form action="{{ action }}" method="post" id="pricelist-item-add-form" enctype="multipart/form-data" novalidate>
+
+	{% csrf_token %}
+
+	<div class="row">
+		<div class="col-2 form-field">
+			{% bootstrap_field form.item_id show_label=False %}
+			<div class="field-errors" style="margin-top: -1rem;"></div>
+		</div>
+		<div class="col-3 form-field">
+			{% bootstrap_field form.name show_label=False %}
+			<div class="field-errors" style="margin-top: -1rem;"></div>
+		</div>
+		<div class="col-2 form-field">
+			{% bootstrap_field form.price show_label=False %}
+			<div class="field-errors" style="margin-top: -1rem;"></div>
+		</div>
+		<div class="col-3 form-field">
+			{% bootstrap_field form.image show_label=False %}
+			<div class="field-errors" style="margin-top: -1rem;"></div>
+		</div>
+
+		{{ form.form_id }}
+		{{ form.upload_url }}
+		{{ form.delete_url }}
+
+		<div class="col-2 text-center">
+			{% buttons %}
+				<button type="submit" class="btn btn-warning text-white">Save</button>
+				<a href="#" class="hide-add-form" style="vertical-align:bottom;">
+					<i class="material-icons">clear</i>
+				</a>
+			{% endbuttons %}
+		</div>
+	</div>
+
+
+</form>

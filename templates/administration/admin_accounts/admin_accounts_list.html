@@ -1,0 +1,16 @@
+{% extends "administration/base.html" %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 pt-3 px-4">
+		<div class="row">
+			{% for admin_account in admin_accounts %}
+				<div class="col-12">
+					{% include "administration/admin_accounts/includes/_admin_account_card.html" %}
+				</div>
+			{% empty %}
+				<div class="col-12"><i>Currently there are no administrator accounts</i></div>
+			{% endfor %}
+		</div>
+	</main>
+{% endblock main_content %}

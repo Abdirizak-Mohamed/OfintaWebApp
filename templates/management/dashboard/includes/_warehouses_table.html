@@ -1,0 +1,18 @@
+<div class="table-responsive">
+	<table class="table table-condensed table-sm dashboard-table warehouses-table">
+		<thead data-url="{% url 'management:warehouses-list' %}">
+		<tr>
+			<th scope="col">Code</th>
+			<th scope="col">Address</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for warehouse in warehouses %}
+			<tr>
+				<td><a href="{{ warehouse.get_absolute_url }}">{{ warehouse.code }}</a></td>
+				<td>{{ warehouse.location.address }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>

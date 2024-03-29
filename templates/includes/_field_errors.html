@@ -1,0 +1,5 @@
+{% if field.errors %}
+	{% for error in field.errors %}
+		<div class="field-error"><small>{{ error|escape }}</small></div>
+	{% endfor %}
+{% endif %}

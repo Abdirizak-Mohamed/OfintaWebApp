@@ -1,0 +1,52 @@
+{% extends "administration/base.html" %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card raised-card">
+					<div class="card-body">
+						<h5 class="card-title">
+							Shop accounts
+							<a href="{% url 'administration:shop-accounts-list' %}" class="btn btn-sm btn-primary">Go to shop accounts</a>
+							<a href="{% url 'administration:shop-account-add' %}" class="btn btn-sm btn-warning text-white">
+								<div>+ Add account</div>
+							</a>
+						</h5>
+						<p class="card-text">
+							{% include "administration/dashboard/includes/_shop_accounts_table.html" %}
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="card raised-card">
+					<div class="card-body">
+						<h5 class="card-title">
+							Administrators
+							<a href="{% url 'administration:admin-accounts-list' %}" class="btn btn-sm btn-primary">Go to administrators</a>
+							<a href="{% url 'administration:admin-account-add' %}" class="btn btn-sm btn-warning text-white">
+								<div>+ Add administrator</div>
+							</a>
+						</h5>
+						<p class="card-text">
+							{% include "administration/dashboard/includes/_admin_accounts_table.html" %}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col-12 col-sm-6 col-md-6">
+				<div class="card raised-card">
+					<div class="card-body">
+						<h5 class="card-title">Statistics</h5>
+						<a href="#" class="btn btn-primary">Show statistics</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}

@@ -1,0 +1,33 @@
+{% extends "management/base.html" %}
+
+
+{% block main_content %}
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 pt-3 px-4">
+	<div class="row justify-content-md-center">
+		<div class="col-6 mt-3">
+			<div class="card raised-card">
+				<div class="card-header">
+					<strong>{{ shop.name }}</strong>
+					<a href="{% url 'management:edit-shop' %}" class="btn btn-sm btn-default">Edit</a>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12">
+							<div>
+								<form method="post" action="{% url 'management:api-key-renew' %}">
+								{% csrf_token %}
+								{{ form }}
+								<strong>API KEY:</strong> {{ shop.api_key }}
+								{% if not user.is_impersonate %}
+								<button class="btn btn-link" type="submit"><i class="material-icons pull-right">autorenew</i></button>
+								{% endif %}
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock main_content %}

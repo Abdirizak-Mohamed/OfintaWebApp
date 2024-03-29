@@ -1,0 +1,15 @@
+{% extends "management/base.html" %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+		<div class="row">
+			<div class="col-12">
+				{% include "management/warehouses/includes/_warehouse_card.html" %}
+			</div>
+			<div class="col-12 mt-1">
+				<a href="{% url 'management:warehouse-edit' pk=warehouse.pk %}" class="btn btn-success">Edit</a>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}

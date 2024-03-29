@@ -1,0 +1,40 @@
+<div class="row position-row">
+	<div class="col-md-2 col-lg-1">
+		<div class="form-group">
+			<label for="id_positions-{{ id }}-item_id"></label>
+			<input type="text" value="{{ pricelist_item.item_id }}" name="positions-{{ id }}-item_id" maxlength="255" class="form-control" placeholder="ID" title="" id="id_positions-{{ id }}-item_id" readonly>
+			{% include "includes/_field_errors.html" with field=form.item_id %}
+		</div>
+	</div>
+	<div class="col-3">
+		<div class="form-group">
+			<label for="id_positions-{{ id }}-name"></label>
+			<input type="text" value="{{ pricelist_item.name }}" name="positions-{{ id }}-name" maxlength="255" class="form-control" placeholder="Name" title="" id="id_positions-{{ id }}-name" readonly>
+			{% include "includes/_field_errors.html" with field=form.name %}
+		</div>
+	</div>
+	<div class="col-2">
+		<div class="form-group quantity-field">
+			<label for="id_positions-{{ id }}-quantity"></label>
+			<input type="number" name="positions-{{ id }}-quantity" value="{{ pricelist_item.quantity|default_if_none:1 }}" min="0" class="form-control" placeholder="Quantity" title="" id="id_positions-{{ id }}-quantity">
+			{% include "includes/_field_errors.html" with field=form.quantity %}
+		</div>
+	</div>
+	<div class="col-2">
+		<div class="form-group price-field">
+			<label for="id_positions-{{ id }}-price"></label>
+			<input type="number" value="{{ pricelist_item.price }}" name="positions-{{ id }}-price" step="0.01" class="form-control" placeholder="Price" title="" id="id_positions-{{ id }}-price">
+			{% include "includes/_field_errors.html" with field=form.price %}
+		</div>
+	</div>
+	<div class="col-2">
+		{% if pricelist_item.get_image %}
+			<img src="{{ pricelist_item.get_image }}" width="40px" height="40px" style="margin: 24px;">
+		{% endif %}
+	</div>
+	<div class="col-1">
+		<a href="#" class="remove-position-item" style="line-height: 100px;">
+			<i class="material-icons">clear</i>
+		</a>
+	</div>
+</div>

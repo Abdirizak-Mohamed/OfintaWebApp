@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+
+{% load svg %}
+{% load bootstrap4 %}
+
+
+{% block content %}
+<div class="row justify-content-md-center mt-3">
+	<div class="col-6">
+		<div class="card raised-card">
+			<div class="card-header bg-dark-theme">
+				{% svg 'brand' %}
+			</div>
+			<div class="card-body">
+				<div class="row mt-3">
+					<div class="col">
+						<div class="row">
+							<div class="col-12">
+								<p>
+								<h2>{{ order.shop.name }}</h2>
+								<div>Order: # {{ order.order_number }}</div>
+								</p>
+							</div>
+						</div>
+						{% if order.positions.exists %}
+						<div class="row">
+							<div class="col-12">ORDER POSITIONS</div>
+						</div>
+						{% for position in order.positions.all %}
+						<div class="row">
+							<div class="col-6"><strong>Product ID:</strong> {{ position.item_id }}</div>
+							<div class="col-6"><strong>Name:</strong> {{ position.name }}</div>
+							<div class="col-6"><strong>Quantity:</strong> {{ position.quantity }}</div>
+							<div class="col-6"><strong>Price:</strong> {{ position.price }} {{ position.currency }}</div>
+						</div>
+						{% endfor %}
+						<hr>
+						<div class="row">
+							<div class="col-6"><strong>Total price:</strong> {{ order.total_price }} {{ order.currency }}</div>
+							<div class="col-6"><strong>Delivery fee:</strong> {{ order.delivery_fee }}</div>
+						</div>
+						{% endif %}
+					</div>
+					<div class="txn_warningcol text-right">
+						<img src="{{ order.shop.get_logo }}" width="200px" height="200px">
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col">
+						<form action="{% url 'payment-link-edit' slug=order.payment_link_id %}" method="post" id="pl-form">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							{% bootstrap_form shipping_address_form %}
+							{% buttons %}
+							<div class="row">
+								<div class="col text-center">
+									<button type="submit" class="btn btn-warning text-white">Submit</button>
+									{% if order.shop.allow_prepayment %}
+										<button type="button" class="btn btn-warning text-white" id="make-payment">Make payment with MPesa</button>
+									{% endif %}
+								</div>
+							</div>
+							{% endbuttons %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="alert alert-danger" id="txn-warning" {% if not txn_warning %}style="display: none;"{% endif %}>
+			{{ txn_warning }}
+		</div>
+
+	</div>
+</div>
+{% endblock content %}
+
+{% block maps_js %}{% endblock %}
+
+{% block bottom_js %}
+<script>
+  var paymentLinkId = '{{order.payment_link_id}}';
+  var paymentStatus = localStorage.getItem('payment_error_' + paymentLinkId);
+  localStorage.removeItem('payment_error_' + paymentLinkId);
+  if (paymentStatus) {
+    $('#txn-warning').text('Payment Error: ' + paymentStatus);
+    $('#txn-warning').show();
+  }
+  $('#make-payment').on('click', function() {
+    $('#id_pay').val('true');
+    $('#pl-form').submit();
+  });
+
+</script>
+{% include "includes/_gmaps_autocomplete.html" with selector="id_address" %}
+{% endblock %}

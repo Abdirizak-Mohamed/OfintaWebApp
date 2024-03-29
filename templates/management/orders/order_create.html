@@ -1,0 +1,189 @@
+{% extends "management/base.html" %}
+
+{% load static %}
+{% load bootstrap4 %}
+
+{% block extra_head %}
+{{ pricelist_search_form.media.css }}
+{% endblock %}
+
+{% block main_content %}
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+	<div class="card raised-card">
+		<form action="{% url 'management:payment-link-create' %}" method="post" id="order-form" novalidate>
+
+			<div class="row justify-content-md-center">
+				<div class="col-12">
+					<div class="card-header">
+						<strong>New payment link order</strong>
+					</div>
+					<div class="card-body">
+						{% if pricelist_items.exists and form.warehouse.field.choices|length %}
+						<div class="row">
+							<div class="col-12">
+								{% csrf_token %}
+								{{ order_formset.management_form }}
+
+								{{ form.shop }}
+
+								<div class="row">
+									<div class="col-3">
+										{% bootstrap_field form.order_number placeholder="" %}
+										{% if form.order_number.errors %}
+											<div class="field-error"><small>Please input order number</small></div>
+										{% endif %}
+									</div>
+									<div class="col-3"></div>
+									<div class="col-3">
+										{% bootstrap_field form.warehouse placeholder="" %}
+										{% if form.warehouse.errors %}
+											<div class="field-error"><small>Please select warehouse</small></div>
+										{% endif %}
+									</div>
+									<div class="col-3">
+										{% bootstrap_field form.delivery_fee placeholder="" %}
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-3">
+										{% bootstrap_field form.buyer_name placeholder="" %}
+										{% if form.buyer_name.errors %}
+											<div class="field-error"><small>Please input name</small></div>
+										{% endif %}
+									</div>
+									<div class="col-3">
+										{% bootstrap_field form.buyer_phone placeholder="" %}
+										{% if form.buyer_phone.errors %}
+											<div class="field-error"><small>Please input phone</small></div>
+										{% endif %}
+									</div>
+									<div class="col-3">
+										{% bootstrap_field form.buyer_email placeholder="" %}
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-6">
+										<div class="row">
+											<div class="col-12">
+												{% bootstrap_field shipping_address_form.address placeholder=" " %}
+												{% if shipping_address_form.address.errors %}
+													<div class="field-error"><small>Please select an existing google map address</small></div>
+												{% endif %}
+											</div>
+											<div class="col-lg-6">
+												{% bootstrap_field form.payment_method placeholder="" %}
+											</div>
+										</div>
+									</div>
+									<div class="col-6">
+										{% bootstrap_field form.comment placeholder="" %}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<hr>
+
+						<div class="row">
+							<div class="col-12">
+								<div class="row">
+
+									<div class="col-12">
+									<p>
+										<strong>Order Items</strong>
+									</p>
+									</div>
+
+									<div class="col-12">
+										<!-- Search form -->
+										<form method="get" action="{% url 'management:pricelist' %}" novalidate>
+											{% csrf_token %}
+
+											<div class="row">
+												<div class="col-md-9 col-lg-5">
+													{% bootstrap_field pricelist_search_form.items show_label=False %}
+												</div>
+												<div class="col-3">
+													<button type="button" class="btn btn-sm btn-primary text-white" id="add-product">Add</button>
+													<button type="button" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#pricelist-search-modal">Pricelist</button>
+												</div>
+											</div>
+										</form>
+										<!-- End search form -->
+									</div>
+									
+									<div class="col-12">
+										<div id="position-rows">
+											{% if order_formset.non_form_errors %}
+												<div class="field-error"><small>You should add at least 1 position to the order</small></div>
+											{% endif %}
+
+											<div class="row">
+												<div class="col-md-2 col-lg-1">ID</div>
+												<div class="col-3">Name</div>
+												<div class="col-2">Quantity</div>
+												<div class="col-2">Price</div>
+												<div class="col-2">Image</div>
+												<div class="col-1"></div>
+											</div>
+
+											{% for form in order_formset %}
+												{% if form.instance.name %}
+													{% include "management/orders/includes/_position_formset_row.html" with id=forloop.counter0 pricelist_item=form.instance form=form %}
+												{% endif %}
+											{% endfor %}
+										</div>
+										<div class="positions-summaryt">
+											<br>
+											<div class="positions-total"><b>Total: <span class="positions-total-value">0</span></b></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<hr>
+						
+						<div class="row">
+							<div class="col-12">
+							{% buttons %}
+								{% if not user.is_impersonate %}
+									<button type="button" id="save-payment-link-btn" class="btn btn-primary">Save order</button>
+								{% endif %}
+							{% endbuttons %}
+							</div>
+						</div>
+						{% else %}
+							{% if not form.warehouse.field.choices|length %}
+							<span style="color: #ff8c00;">Please setup a warehouse location in <a href="{% url 'management:warehouses-list' %}">Warehouses</a>.
+							{% else %}
+							<span style="color: #ff8c00;">Please add items to the <a href="{% url 'management:pricelist' %}">Price list</a>.
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</main>
+
+{% include "management/pricelist/includes/_pricelist_order_create_modal.html" %}
+
+{{ pricelist_search_form.media.js }}
+<script>
+$(function(){
+$('.django-select2').on("select2:select", function (e) { $('#add-product').click(); });
+})
+</script>
+
+{% endblock main_content %}
+
+{% block maps_js %}{% endblock %}
+
+{% block bottom_js %}
+{% include "includes/_gmaps_autocomplete.html" with selector="id_address" %}
+
+<script src="{% static 'js/order-create.js' %}"></script>
+{% endblock %}

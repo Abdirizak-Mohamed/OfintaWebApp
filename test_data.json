@@ -1,0 +1,296 @@
+[
+  {
+    "model": "core.ofintauser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$Nsa6d7CHFoGE$Syt2JJN0T6LBnP7PAGSuzB7W3oWeWEIqjan19UK6NNk=",
+      "last_login": "2018-04-09T10:10:31.976Z",
+      "is_superuser": true,
+      "first_name": "Joe",
+      "last_name": "Mason",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2018-03-25T19:29:19Z",
+      "role": 1,
+      "shop": 1,
+      "email": "joe.mason@example.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.ofintauser",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$ve3Rkg1hKxBe$GU2OcdknR+AiKYokun2jlQz8Ekrz5jVlqxJ2Xa+t19M=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Florence",
+      "last_name": "Akpabio",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-03-26T08:28:31Z",
+      "role": 2,
+      "shop": 1,
+      "email": "florence.akpabio@example.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.ofintauser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$itiSIJUwBq9H$By7N0XdvEiGdmeos2TSbDodsR43XvmUSR5NWPttcxSQ=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Abraham",
+      "last_name": "Oyenusi",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2018-03-29T15:59:25Z",
+      "role": 3,
+      "shop": null,
+      "email": "abraham.oyenusi@example.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.ofintauser",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$s5bYaUWAWtte$/7fVgsmk58/micluZ5J4eca0Hru0U362VbV8JX82+EA=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Richard",
+      "last_name": "Anenih",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-04-09T11:11:50Z",
+      "role": 4,
+      "shop": 1,
+      "email": "richard.anenih@example.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.ofintauser",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$jvSkpn9ZucGX$ptWLn9h90PVb+ZqlpmOwoafQoTuKQ2kJpPre0/DBTHg=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Gideon",
+      "last_name": "Madaki",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-04-09T11:12:45Z",
+      "role": 4,
+      "shop": 1,
+      "email": "gideon.madaki@example.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "drivers.driverprofile",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "phone": "+25420828732",
+      "driver_id": "123456780",
+      "bike_registration": "123456780",
+      "coordinates": "SRID=4326;POINT (39.65802499999999 -4.057318)",
+      "last_update": "2018-04-09T11:12:45Z"
+    }
+  },
+  {
+    "model": "drivers.driverprofile",
+    "pk": 2,
+    "fields": {
+      "user": 5,
+      "phone": "+25420828732",
+      "driver_id": "1234567890",
+      "bike_registration": "1234567890",
+      "coordinates": "SRID=4326;POINT (39.6650254 -4.060741999999999)",
+      "last_update": "2018-04-09T11:12:45Z"
+    }
+  },
+  {
+    "model": "shared.location",
+    "pk": 1,
+    "fields": {
+      "address": "Mombasa Reinsurance Plaza",
+      "coordinates": "SRID=4326;POINT (39.6650254 -4.060741999999999)"
+    }
+  },
+  {
+    "model": "shared.location",
+    "pk": 2,
+    "fields": {
+      "address": "Crown Paints Distributor-Jihan Freighters Ltd",
+      "coordinates": "SRID=4326;POINT (39.65802499999999 -4.057318)"
+    }
+  },
+  {
+    "model": "shared.location",
+    "pk": 3,
+    "fields": {
+      "address": "P.O. Box 84935, Mbaraki Rd, Mombasa",
+      "coordinates": "SRID=4326;POINT (39.6656299 -4.0700293)"
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 1,
+    "fields": {
+      "order_number": 1,
+      "status": 7,
+      "shop": 1,
+      "driver": 4,
+      "warehouse": 1,
+      "shipping_address": 2,
+      "delivery_fee": "7.41",
+      "buyer_name": "Patrick\u00a0\u00a0Soyinka",
+      "buyer_phone": "+254-5050951",
+      "is_paid": false,
+      "created_at": "2018-03-25T19:53:03Z",
+      "completed_at": null,
+      "payment_method": 0
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 2,
+    "fields": {
+      "order_number": 3,
+      "status": 3,
+      "shop": 1,
+      "driver": null,
+      "warehouse": 1,
+      "shipping_address": 1,
+      "delivery_fee": "12.41",
+      "buyer_name": "Leonard\u00a0\u00a0Onwuatuegwu",
+      "buyer_phone": "+254-20318099",
+      "is_paid": false,
+      "created_at": "2018-03-25T19:54:56.449Z",
+      "completed_at": null,
+      "payment_method": 1
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 3,
+    "fields": {
+      "order_number": 4,
+      "status": 6,
+      "shop": 1,
+      "driver": 5,
+      "warehouse": 2,
+      "shipping_address": 3,
+      "delivery_fee": "45.00",
+      "buyer_name": "Irene\u00a0\u00a0Akpabio",
+      "buyer_phone": "+254-5023287",
+      "is_paid": true,
+      "created_at": "2018-03-25T19:56:36.590Z",
+      "completed_at": "2018-03-25T19:56:28Z",
+      "payment_method": 0
+    }
+  },
+  {
+    "model": "orders.position",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "item_id": "3387434",
+      "name": "White T-Shirt",
+      "quantity": 2,
+      "price": "10.00"
+    }
+  },
+  {
+    "model": "orders.position",
+    "pk": 2,
+    "fields": {
+      "order": 2,
+      "item_id": "23434",
+      "name": "Black bag",
+      "quantity": 3,
+      "price": "72.00"
+    }
+  },
+  {
+    "model": "orders.position",
+    "pk": 3,
+    "fields": {
+      "order": 2,
+      "item_id": "743425",
+      "name": "Blue Jacket",
+      "quantity": 4,
+      "price": "120.00"
+    }
+  },
+  {
+    "model": "orders.position",
+    "pk": 4,
+    "fields": {
+      "order": 3,
+      "item_id": "45356",
+      "name": "Yellow dress",
+      "quantity": 7,
+      "price": "150.00"
+    }
+  },
+  {
+    "model": "shops.shop",
+    "pk": 1,
+    "fields": {
+      "api_key": "2abc1f3b83cdbec5eb65b2f66648ba0f48180e31",
+      "name": "Jos Mason's shop"
+    }
+  },
+  {
+    "model": "warehouses.warehouse",
+    "pk": 1,
+    "fields": {
+      "shop": 1,
+      "name": "Warehouse #1",
+      "location": 3
+    }
+  },
+  {
+    "model": "warehouses.warehouse",
+    "pk": 2,
+    "fields": {
+      "shop": 1,
+      "name": "Warehouse #2",
+      "location": 1
+    }
+  },
+  {
+    "model": "demoshop.demoproduct",
+    "pk": 1,
+    "fields": {
+      "price": "345.00",
+      "name": "Leather bag"
+    }
+  },
+  {
+    "model": "demoshop.demoproduct",
+    "pk": 2,
+    "fields": {
+      "price": "121.00",
+      "name": "Black bag"
+    }
+  },
+  {
+    "model": "demoshop.demoproduct",
+    "pk": 3,
+    "fields": {
+      "price": "452.00",
+      "name": "Yellow dress"
+    }
+  }
+]

@@ -1,0 +1,20 @@
+<div class="row mt-3">
+	<div class="col-12">
+		<a href="{% url 'management:driver-add' %}" class="btn btn-sm btn-warning text-white">+ Add new driver</a>
+	</div>
+</div>
+<div class="row">
+	{% for driver in active_drivers %}
+	<div class="col-12">
+		{% include "management/drivers/includes/_driver_card.html" with active=True %}
+	</div>
+	{% endfor %}
+	{% for driver in inactive_drivers %}
+	<div class="col-12">
+		{% include "management/drivers/includes/_driver_card.html" with active=False %}
+	</div>
+	{% endfor %}
+	{% if not active_drivers and not inactive_drivers %}
+	<div class="col-12"><i>Currently there are no drivers</i></div>
+	{% endif %}
+</div>

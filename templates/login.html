@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load svg %}
+{% load bootstrap4 %}
+
+
+{% block content %}
+	<div class="row justify-content-md-center bg-light-themme">
+		<div class="col-12 text-center">
+			<h1 class="m-t-10">{% svg "brand_1" %}</h1>
+		</div>
+	</div>
+
+	<div class="row justify-content-md-center">
+		<div class="col-12 gradient-light" style="min-width: 50px;">&nbsp;</div>
+		<div class="col-12 col-sm-4 col-md-4">
+			<div class="card login-card full-width m-t-50">
+				<div class="card-header">
+					LOGIN
+				</div>
+				<div class="card-body">
+					<form class="form-login" action="{% url 'login' %}" method="post">
+						{% csrf_token %}
+						{% bootstrap_form form %}
+						{% buttons %}
+						<div class="row">
+							<div class="col text-center">
+								<button type="submit" class="btn btn-warning text-white">LOG IN</button>
+							</div>
+						</div>
+						{% endbuttons %}
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

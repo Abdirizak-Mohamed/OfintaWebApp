@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+
+{% load svg %}
+
+
+{% block navbar %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-2 bg-dark-theme">
+			<a class="navbar-brand m-t-10" href="#">
+				{% svg 'brand' %}
+			</a>
+		</div>
+		<div class="col-10">
+			<div class="row m-t-10">
+				<div class="col-md-6 col-lg-6"><a href="{% url 'management:payment-link-create' %}" class="btn btn-warning text-white">+ New payment link</a></div>
+				<div class="col-md-4 col-lg-4 text-right">
+					Hello, <strong>{{ request.user.get_full_name | default_if_none:request.user.email }}</strong>
+					<img class="rounded-circle user-image m-l-10" src="{{ request.user.shop.get_logo }}" width="32px" height="32px">
+				</div>
+				<div class="col-1 text-right">
+					{% if user.is_owner or user.is_admin %}
+					<a href="{% url 'management:settings' %}" class="text-black">
+						<i class="material-icons m-t-5">settings</i>
+					</a>
+					{% endif %}
+					{% if user.is_impersonate %}
+						<a href="{% url 'impersonate-stop' %}">Stop</a>
+					{% else %}
+					<a href="{% url 'logout' %}">
+						<i class="material-icons text-black">undo</i>
+					</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="row">
+	<div class="col-2 gradient-dark" style="min-width: 50px;">
+		&nbsp;
+	</div>
+	<div class="col-10 gradient-light" style="min-width: 50px;">
+		&nbsp;
+	</div>
+</div>
+<div class="row">
+	{% block sidebar_wrapper %}
+	<nav class="col-md-2 col-lg-2 col-xl-2 d-none d-md-block bg-dark-theme sidebar">
+		{% block sidebar %}
+		<div class="sidebar-sticky">
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:dashboard' %}">
+						<span class="m-r-10">{% svg 'dashboard' %}</span>
+						Dashboard
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:orders-list' %}">
+						<span class="m-r-10">{% svg 'active_orders' %}</span>
+						Active orders
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:orders-history' %}">
+						<span class="m-r-10">{% svg 'orders_history' %}</span>
+						Orders history
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:pricelist' %}">
+						<span class="m-r-10">{% svg 'price_list' %}</span>
+						Price list
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:drivers-list' %}">
+						<span class="m-r-10">{% svg 'drivers' %}</span>
+						Drivers
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:warehouses-list' %}">
+						<span class="m-r-10">{% svg 'warehouses' %}</span>
+						Warehouses
+					</a>
+				</li>
+				{% if request.user.is_owner %}
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:managers-list' %}">
+						<span class="m-r-10">{% svg 'managers' %}</span>
+						Managers
+					</a>
+				</li>
+				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{% url 'management:reports' %}">
+						<span class="m-r-10">{% svg 'reports' %}</span>
+						Reports
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	{% endblock sidebar %}
+	{% endblock sidebar_wrapper %}
+
+	{% block main_content_wrapper %}
+	{% block main_content %}{% endblock main_content %}
+	{% endblock main_content_wrapper %}
+</div>
+{% endblock content %}

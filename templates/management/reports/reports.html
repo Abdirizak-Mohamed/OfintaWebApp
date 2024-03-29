@@ -1,0 +1,71 @@
+{% extends "management/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block extrahead %}
+	{{ search_form.media }}
+{% endblock %}
+
+
+{% block main_content %}
+	<div class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 pt-3 px-4">
+	{% if filter_form %}
+		<div class="card raised-card">
+			<div class="card-body">
+				<form id="filter-form" method="get" action="{% url 'management:orders-list' %}">
+					<div class="row align-self-center">
+						{% for field in filter_form %}
+							<div class="col-12 col-sm-4 col-md-4">
+								{% bootstrap_field field %}
+							</div>
+						{% endfor %}
+						<div class="col-12 col-sm-4 col-md-4">
+							<div class="form-group">
+								<label>&nbsp;</label>
+								<div>
+									<a href="{% url 'management:reports' %}" class="btn btn-secondary">Reset</a>
+									<button type="submit" class="btn btn-warning text-white">Filter</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							{% bootstrap_form_errors filter_form %}
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="card raised-card mt-3">
+		<div class="card-body">
+			<div class="row text-bold">
+				<div class="col-xs-2 col-sm-3 col-md-2">Order number</div>
+				<div class="col-xs-3 col-sm-3 col-md-2">Status</div>
+				<div class="col-xs-2 col-sm-2 col-md-2">Payment method</div>
+				<div class="col-xs-3 col-sm-3 col-md-2">Created at</div>
+			</div>
+			<hr>
+			{% for order in orders %}
+				<div class="row">
+					<div class="col-xs-3 col-sm-3 col-md-2"><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></div>
+					<div class="col-xs-3 col-sm-3 col-md-2">{{ order.status_verbose }}</div>
+					<div class="col-xs-2 col-sm-2 col-md-2">{{ order.payment_method_verbose }}</div>
+					<div class="col-xs-3 col-sm-3 col-md-2">{{ order.created_at }}</div>
+				</div>
+				{% if not forloop.last %}<hr>{% endif %}
+			{% endfor %}
+		</div>
+
+		<script>
+      $('#id_start_date').datepicker({
+        uiLibrary: 'bootstrap4'
+      });
+      $('#id_end_date').datepicker({
+        uiLibrary: 'bootstrap4'
+      });
+		</script>
+	</div>
+{% endblock main_content %}

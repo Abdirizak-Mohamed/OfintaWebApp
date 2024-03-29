@@ -1,0 +1,27 @@
+<div class="table-responsive">
+	<table class="table table-condensed table-sm dashboard-table drivers-table">
+		<thead data-url="{% url 'management:drivers-list' %}">
+		<tr>
+			<th scope="col">Status</th>
+			<th scope="col">Name</th>
+			<th scope="col">Phone</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for driver in active_drivers %}
+			<tr>
+				<td><span class="dot green-dot"></span></td>
+				<td><a href="{% url 'management:driver-details' driver.pk %}">{{ driver.first_name }} {{ driver.last_name }}</a></td>
+				<td>{{ driver.driver_profile.phone }}</td>
+			</tr>
+		{% endfor %}
+		{% for driver in inactive_drivers %}
+			<tr>
+				<td><span class="dot red-dot"></span></td>
+				<td><a href="{% url 'management:driver-details' driver.pk %}">{{ driver.first_name }} {{ driver.last_name }}</a></td>
+				<td>{{ driver.driver_profile.phone }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>

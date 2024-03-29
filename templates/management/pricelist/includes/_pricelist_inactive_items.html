@@ -1,0 +1,27 @@
+{% load bootstrap4 %}
+
+
+<div class="row justify-content-center align-self-center">
+	<div class="col-12">
+		<div class="row">
+			<div class="col-6">
+				<a class="btn btn-sm btn-primary" href="{% url 'management:pricelist' %}">Pricelist</a>
+				<a class="btn btn-sm btn-primary" href="{% url 'management:pricelist-inactive' %}">Pricelist (inactive)</a>
+			</div>
+		</div>
+		<hr>
+		<h2>
+			Pricelist (inactive)
+		</h2>
+
+		<div class="card raised-card mt-1">
+			<div class="card-body">
+				{% for pricelist_item in pricelist_items %}
+					{% include "management/pricelist/includes/_pricelist_item.html" %}
+				{% empty %}
+					<i>Currently there are no pricelist items</i>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

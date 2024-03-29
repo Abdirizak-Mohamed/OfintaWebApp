@@ -1,0 +1,77 @@
+<div class="card mt-3 raised-card">
+	<div class="card-header">
+		<div class="row">
+			<div class="col">
+				{% if orders %}
+					<a href="{{ order.get_absolute_url }}"><strong>{{ order.buyer_name }}</strong> (#{{ order.order_number }})</a>
+				{% else %}
+					<strong>{{ order.buyer_name }}</strong> order (#{{ order.order_number }})
+				{% endif %}
+				{% if object.payment_method %}<span class="badge badge-success">{{ order.payment_method_verbose }}</span>{% endif %}
+			</div>
+			<div class="col text-right">
+				<strong>{{ order.created_at|date:"M d Y H:i" }}</strong>
+			</div>
+			{% if order.completed_at  %}
+			<div class="col text-right">
+				<strong>Completed: {{ order.completed_at|date:"M d Y H:i" }}</strong>
+			</div>
+			{% endif %}
+		</div>
+		<div class="row">
+			<div class="col">
+				<div><strong>Status:</strong> {{ order.status_verbose }}</div>
+			</div>
+		</div>
+		{% if order.is_payment_link and not order.is_delivered and not order.is_completed %}
+		<div class="row">
+			<div class="col">
+				<div><span class="badge badge-success">Payment link</span> <a href="{{ order.payment_link }}"><em>{{ order.payment_link }}</em></a></div>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-12 col-sm-5">
+				<div><strong>Address:</strong> {{ order.shipping_address.address }}</div>
+				<div><strong>Warehouse:</strong> {{ order.warehouse.name }}</div>
+			</div>
+			<div class="col-12 col-sm-4">
+				<div><strong>Phone:</strong> {{ order.buyer_phone }}</div>
+				<div><strong>Quantity:</strong> {{ order.total_quantity }}</div>
+			</div>
+			<div class="col-12 col-sm-3 text-right">
+				<div><strong>Total price:</strong> {{ order.total_price }}</div>
+				<div><strong>Delivery fee:</strong> {{ order.delivery_fee }}</div>
+			</div>
+		</div>
+	{% if order.comment %}
+	<div class="row">
+		<div class="col-12 col-sm-12">
+			<strong>Comment:</strong>
+			{{ order.comment|linebreaksbr }}
+		</div>
+	</div>
+	{% endif %}
+	<div class="row">
+		<div class="col-12 col-sm-12">
+			<strong>Driver:</strong>
+			{% if order.assigned_driver %}
+				<img class="rounded-circle" src="{{ order.assigned_driver.driver_profile.get_photo }}" width="25px" height="25px">
+				{{ order.assigned_driver.driver_profile.user.first_name }} {{ order.assigned_driver.driver_profile.user.last_name }} ({{ order.assigned_driver.driver_profile.phone }})
+				{% if not order.is_delivered and not order.is_completed and not order.is_canceled %}
+				<a href="{% url 'management:driver-assign' pk=order.pk %}" class="btn btn-sm btn-primary">Re-assign</a>
+				{% endif %}
+			{% else %}
+				{% if user.is_impersonate %}
+					N/A
+				{% elif order.is_canceled %}
+				{% else %}
+					<a href="{% url 'management:driver-assign' pk=order.pk %}" class="btn btn-sm btn-primary">Assign</a>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+	</div>
+</div>

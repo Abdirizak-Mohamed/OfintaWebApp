@@ -1,0 +1,25 @@
+{% extends "management/base.html" %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+		<div class="row">
+			<div class="col-12">
+				{% include "management/managers/includes/_manager_card.html" %}
+			</div>
+			<div class="col-12 mt-1">
+				<form method="post" action="{% url 'management:manager-status' pk=manager.pk %}">
+					{% csrf_token %}
+					{{ form }}
+					{% if not user.is_impersonate %}
+						<a href="{% url 'management:manager-remove' manager.pk %}" class="btn btn-secondary">Remove</a>
+						<button type="submit" class="btn {% if manager.is_active %}btn-secondary{% else %}btn-success{% endif %}">
+							{% if manager.is_active %}Disable{% else %}Enable{% endif %}
+						</button>
+					{% endif %}
+					<a href="{% url 'management:manager-edit' pk=manager.pk %}" class="btn btn-success">Edit</a>
+				</form>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}

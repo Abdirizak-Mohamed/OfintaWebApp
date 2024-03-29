@@ -1,0 +1,11 @@
+Hi, {{ first_name }} {{ last_name }}
+
+We are glad you have joined the Ofinta team!
+
+An account has been created for you to access the mobile App.
+You can login into the App using your credentials:
+{{ email }}
+{{ password }}
+
+Regards,
+Ofinta team

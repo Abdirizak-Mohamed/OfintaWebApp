@@ -1,0 +1,81 @@
+{% extends "management/base.html" %}
+
+
+{% load static %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 pt-3 px-4 bg-light">
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<div class="card raised-card m-b-20">
+					<div class="card-body">
+						{% comment %}
+							<div class="float-right">
+								<a href="{% url 'management:payment-link-create' %}" class="btn btn-warning text-white">+ New payment link</a>
+							</div>
+						{% endcomment %}
+					
+						<h5 class="card-title"><a href="{% url 'management:orders-list' %}">ACTIVE ORDERS</a></h5>
+						<p class="card-text">{% include "management/dashboard/includes/_orders_table.html" with orders=active_orders orders_type="active" %}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<div class="card raised-card">
+					<div class="card-body">
+						<h5 class="card-title"><a href="{% url 'management:orders-history' %}">ORDERS HISTORY</a></h5>
+						<p class="card-text">{% include "management/dashboard/includes/_orders_table.html" with orders=recent_orders orders_type="history" %}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+				<div class="card raised-card m-b-20">
+					<div class="card-body">
+						<h5 class="card-title"><a href="{% url 'management:drivers-list' %}">DRIVERS</a></h5>
+						<p class="card-text">{% include "management/dashboard/includes/_drivers_table.html" with active_drivers=active_drivers inactive_drivers=inactive_drivers %}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+				<div class="card raised-card m-b-20">
+					<div class="card-body">
+						<h5 class="card-title"><a href="{% url 'management:warehouses-list' %}">WAREHOUSES</a></h5>
+						<p class="card-text">{% include "management/dashboard/includes/_warehouses_table.html" with warehouses=warehouses %}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			{% if request.user.is_owner %}
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+					<div class="card raised-card m-b-20">
+						<div class="card-body">
+							<h5 class="card-title">
+								<div class="row">
+									<div class="col-5"><a href="{% url 'management:managers-list' %}">MANAGERS</a></div>
+									<div class="col-7 text-right">
+										<a href="{% url 'management:managers-list' %}" class="btn btn-sm btn-warning text-white">Show full list</a>
+										<a href="{% url 'management:manager-add' %}" class="btn btn-sm btn-warning text-white">
+											<div>+ Add new manager</div>
+										</a>
+									</div>
+								</div>
+							</h5>
+							<p class="card-text">{% include "management/dashboard/includes/_managers_table.html" with managers=managers %}</p>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</main>
+{% endblock main_content %}
+
+{% block bottom_js %}
+	<script src="{% static 'js/management/dashboard.js' %}"></script>
+{% endblock %}

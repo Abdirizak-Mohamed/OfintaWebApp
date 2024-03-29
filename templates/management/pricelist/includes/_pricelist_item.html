@@ -1,0 +1,28 @@
+{% load svg %}
+
+
+<div class="row" data-id="{{ pricelist_item.id }}">
+	<div class="col-2"><strong><span class="item_id">{{ pricelist_item.item_id }}</span></strong></div>
+	<div class="col-3">
+		<span class="item_name">{{ pricelist_item.name }}</span>
+	</div>
+	<div class="col-2">
+		<span class="item_price">{{ pricelist_item.price }}</span> {{ pricelist_item.price_currency }}
+	</div>
+	<div class="col-3">
+		{% if pricelist_item.get_image %}
+			<img class="item_image" src="{{ pricelist_item.get_image }}" width="40px" height="40px">
+		{% endif %}
+	</div>
+	{% if pricelist_item.is_active %}
+		<div class="col-2">
+			<a href="{% url 'management:pricelist-item-edit' pricelist_item.pk %}" class="pricelist-item-edit">
+				{% svg 'pencil' %}
+			</a>
+			<a href="{% url 'management:pricelist-item-delete' pricelist_item.pk %}">
+				{% svg 'bin' %}
+			</a>
+		</div>
+	{% endif %}
+</div>
+{% if not forloop.last %}<hr>{% endif %}

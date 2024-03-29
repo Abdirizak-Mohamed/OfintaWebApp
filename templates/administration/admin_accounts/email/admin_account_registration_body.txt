@@ -1,0 +1,7 @@
+New administrator account was created for you.
+
+
+Now you can login using your email and password:
+{{ password }}
+
+* it is recommended to change password after login

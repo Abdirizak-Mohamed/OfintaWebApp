@@ -1,0 +1,9 @@
+<div class="row">
+	{% for order in orders %}
+		<div class="col-12">
+			{% include "management/orders/includes/_order_card.html" %}
+		</div>
+	{% empty %}
+		<div class="col-12"><i>No orders</i></div>
+	{% endfor %}
+</div>

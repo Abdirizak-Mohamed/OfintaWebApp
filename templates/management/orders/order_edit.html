@@ -1,0 +1,51 @@
+{% extends "management/base.html" %}
+
+{% load bootstrap4 %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+		<div class="row justify-content-md-center">
+			<div class="col-12">
+				<div class="card raised-card mt-3">
+					<div class="card-header">
+						<div class="row">
+							<div class="col">
+								<a href="{{ order.get_absolute_url }}"><strong>{{ order.buyer_name }}</strong> order</a>
+								<span class="badge badge-success">{{ order.payment_method_verbose }}</span>
+							</div>
+							<div class="col text-center">
+								<strong>Created: {{ order.created_at }}</strong>
+							</div>
+							{% if order.completed_at  %}
+								<div class="col text-center">
+									<strong>Completed: {{ order.completed_at }}</strong>
+								</div>
+							{% endif %}
+							<div class="col text-right">
+								<strong>Status:</strong> {{ order.status_verbose }}
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<form action="{% url 'management:order-edit' pk=order.pk %}" method="post">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							{% bootstrap_form shipping_address_form %}
+							{% buttons %}
+								{% if not user.is_impersonate %}
+									<button type="submit" class="btn btn-primary">Save</button>
+								{% endif %}
+							{% endbuttons %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}
+
+
+{% block maps_js %}
+	{% include "includes/_gmaps_autocomplete.html" with selector="id_address" %}
+{% endblock %}

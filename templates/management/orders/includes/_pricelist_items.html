@@ -1,0 +1,27 @@
+<div class="row" style="margin: 10px 0;">
+	<div class="col-1" style="line-height: 40px;"><strong>ID</strong></div>
+	<div class="col-3" style="line-height: 40px;"><strong>Name</strong></div>
+	<div class="col-3" style="line-height: 40px;"><strong>Price</strong></div>
+	<div class="col-2"><strong>Image</strong></div>
+	<div class="col-3"></div>
+</div>
+
+{% for pricelist_item in pricelist_items %}
+	<div class="row" style="margin: 10px 0;">
+		<div class="col-1" style="line-height: 40px;">{{ pricelist_item.item_id }}</div>
+		<div class="col-3" style="line-height: 40px;">{{ pricelist_item.name }}</div>
+		<div class="col-3" style="line-height: 40px;">{{ pricelist_item.price }} {{ pricelist_item.price_currency }}</div>
+		<div class="col-2">
+			{% if pricelist_item.get_image %}
+				<img src="{{ pricelist_item.get_image }}" width="40px" height="40px">
+			{% endif %}
+		</div>
+		<div class="col-3" style="line-height: 40px;">
+			<button type="button" class="btn btn-sm btn-light add-pricelist-item" data-id="{{ pricelist_item.id }}">
+				Add
+			</button>
+		</div>
+	</div>
+{% empty %}
+	<small><i>No price list items yet</i></small>
+{% endfor %}

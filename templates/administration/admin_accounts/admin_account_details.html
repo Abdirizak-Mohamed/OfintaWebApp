@@ -1,0 +1,23 @@
+	{% extends "administration/base.html" %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+		<div class="row">
+			<div class="col-12">
+				{% include "administration/admin_accounts/includes/_admin_account_card.html" %}
+			</div>
+			<div class="col-12 mt-1">
+				<form method="post" action="{% url 'administration:admin-account-disable' pk=admin_account.pk %}">
+					{% csrf_token %}
+					{{ form }}
+					<a href="{% url 'administration:admin-account-remove' admin_account.pk %}" class="btn btn-secondary">Remove</a>
+					{% if admin_account.is_active %}
+						<button type="submit" class="btn btn-secondary">Disable</button>
+						<a href="{% url 'administration:admin-account-edit' pk=admin_account.pk %}" class="btn btn-success">Edit</a>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}

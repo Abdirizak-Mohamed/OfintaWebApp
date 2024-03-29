@@ -1,0 +1,63 @@
+{% extends "management/base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block main_content %}
+<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+	<div class="row">
+		<div class="col-12">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card raised-card">
+						<div class="card-body">
+							<form id="search-form" method="get" action="{% url 'management:pricelist-item-search' %}">
+								<div class="row">
+									<div class="col-md-6 col-lg-4">
+										{% bootstrap_field search_form.query show_label=False %}
+									</div>
+									<div class="col-md-6 col-lg-8 col-xl-7 text-right">
+										<a class="btn btn-sm btn-warning text-white" id="add-new-pricelist-item" href="#">+ Add item</a>
+										<a class="btn btn-sm btn-default" href="{% url 'management:pricelist-inactive' %}">Inactive items</a>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col">
+										{% bootstrap_form_errors search_form %}
+									</div>
+								</div>
+							</form>
+
+							<hr>
+
+							<div class="pricelist-items">
+								{% include "management/pricelist/includes/_pricelist_items.html" %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+<div id="modals-container"></div>
+
+{% include 'django_file_form/upload_template.html' %}
+
+
+{% endblock main_content %}
+
+
+{% block bottom_js %}
+<script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
+<script src="{% static 'file_form/file_form.js' %}"></script>
+<link rel="stylesheet" href="{% static 'ajaxuploader/css/fileuploader.css' %}">
+
+<script>
+  var addItemUrl = '{% url "management:pricelist-item-add" %}';
+</script>
+<script src="{% static 'js/pricelist.js' %}"></script>
+{% endblock %}

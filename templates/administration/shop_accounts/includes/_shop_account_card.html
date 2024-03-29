@@ -1,0 +1,24 @@
+<div class="card raised-card {% if not forloop.first %}mt-3{% endif %}">
+	<div class="card-header">
+		<div class="row">
+			<div class="col">
+				<a href="{% url 'administration:shop-account-details' shop_account.pk %}"><strong>{{ shop_account }}</strong></a>
+			</div>
+			<div class="col text-right">
+				<strong>Active:</strong> {{ shop_account.is_active }}
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-6">
+				<div><strong>First name:</strong> {{ shop_account.first_name }}</div>
+				<div><strong>Last name:</strong> {{ shop_account.last_name }}</div>
+			</div>
+			<div class="col-6">
+				<div><strong>Email:</strong> {{ shop_account.email }}</div>
+				<div><strong>Shop:</strong> {{ shop_account.shop.name }}</div>
+			</div>
+		</div>
+	</div>
+</div>

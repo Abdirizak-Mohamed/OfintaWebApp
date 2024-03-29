@@ -1,0 +1,18 @@
+<div class="table-responsive">
+	<table class="table table-sm table-condensed dashboard-table managers-table">
+		<thead>
+		<tr>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for manager in managers %}
+			<tr>
+				<td><a href="{% url 'management:manager-details' manager.pk %}">{{ manager.first_name }}</a></td>
+				<td>{{ manager.last_name }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>

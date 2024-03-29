@@ -1,0 +1,16 @@
+{% extends "management/base.html" %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 pt-3 px-4">
+		<div class="row">
+			{% for manager in managers %}
+				<div class="col-12">
+					{% include "management/managers/includes/_manager_card.html" %}
+				</div>
+			{% empty %}
+				<div class="col-12"><i>Currently there are no managers</i></div>
+			{% endfor %}
+		</div>
+	</main>
+{% endblock main_content %}

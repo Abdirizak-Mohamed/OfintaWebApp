@@ -1,0 +1,28 @@
+<div class="table-responsive">
+	<table class="table table-sm table-condensed dashboard-table orders-table">
+		<thead {% if orders_type == "active" %}data-url="{% url 'management:orders-list' %}"{% elif orders_type == "history" %}data-url="{% url 'management:orders-history' %}"{% endif %}>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Buyer</th>
+				<th scope="col">Warehouse</th>
+				<th scope="col">Destination</th>
+				<th scope="col">Status</th>
+				<th scope="col">Payment method</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for order in orders %}
+		<tr>
+			<td><a href="{{ order.get_absolute_url }}">{{ order.order_number }}</a></td>
+			<td>{{ order.buyer_name }}</td>
+			<td><a href="{{ order.warehouse.get_absolute_url }}">{{ order.warehouse.name }}</a></td>
+			<td>{{ order.shipping_address.address }}</td>
+			<td>{{ order.status_verbose }}</td>
+			<td>{{ order.payment_method_verbose }}</td>
+		</tr>
+		{% empty %}
+		<td colspan="6"><i>Currently there are no orders</i></td>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>

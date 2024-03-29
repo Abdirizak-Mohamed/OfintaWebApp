@@ -1,0 +1,24 @@
+<div class="card raised-card {% if not forloop.first %}mt-3{% endif %}">
+	<div class="card-header">
+		<div class="row">
+			<div class="col">
+				<a href="{% url 'management:manager-details' manager.pk %}"><strong>{{ manager }}</strong></a>
+			</div>
+			<div class="col text-right">
+				<strong>Active:</strong> {{ manager.is_active }}
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-6">
+				<div><strong>First name:</strong> {{ manager.first_name }}</div>
+				<div><strong>Last name:</strong> {{ manager.last_name }}</div>
+			</div>
+			<div class="col-6">
+				<div><strong>Email:</strong> {{ manager.email }}</div>
+				<div><strong>Shop:</strong> {{ manager.shop.name }}</div>
+			</div>
+		</div>
+	</div>
+</div>

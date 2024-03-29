@@ -1,0 +1,56 @@
+<div class="table-responsive">
+	<table class="table table-sm table-bordered table-condensed">
+		<thead class="thead-light">
+		<tr>
+			<th scope="col">Full name</th>
+			<th scope="col">Email</th>
+			<th scope="col">Shop</th>
+			<th scope="col">View as</th>
+			<th scope="col"></th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for shop_account in shop_accounts %}
+			<tr>
+				<td><a href="{% url 'administration:shop-account-details' shop_account.pk %}">{{ shop_account.first_name }} {{ shop_account.last_name }}</a></td>
+				<td>{{ shop_account.email }}</td>
+				<td>{{ shop_account.shop.name }}</td>
+				<td>
+					<form action="." method="get" class="impersonate-form">
+						{% csrf_token %}
+						<select name="owner" class="custom-select col-sm-10">
+							{% for owner in shop_account.shop.get_owners %}
+								<option {% if forloop.first %}selected{% endif %} value="{{ owner.id }}">{{ owner }}</option>
+							{% endfor %}
+						</select>
+					</form>
+				</td>
+				<td>
+					<button type="button" class="btn btn-success btn-sm start-impersonate">
+						<i class="material-icons">remove_red_eye</i>
+						</button>
+				</td>
+			</tr>
+		{% empty %}
+			<td colspan="5"><i>Currently there are no active shop accounts</i></td>
+		{% endfor %}
+		</tbody>
+	</table>
+
+	<script>
+    $(document).ready(function() {
+      var $impersonateForm = $('.impersonate-form'),
+          $startImpersonateBtn = $('.start-impersonate');
+
+      $startImpersonateBtn.on('click', function() {
+				$(this).closest('tr').find('.impersonate-form').submit();
+      });
+      $impersonateForm.on('submit', function() {
+        var $form = $(this);
+        var ownerId = $form.find('select').val();
+        window.location.href = '/impersonate/' + ownerId;
+        return false;
+      });
+    });
+	</script>
+</div>

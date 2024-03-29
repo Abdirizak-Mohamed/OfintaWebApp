@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  var map;
+  function initializeMap() {
+    var mapOptions = {
+      zoom: 7,
+      center: warehouseAddress,
+    };
+    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    var bounds = new google.maps.LatLngBounds();
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer({
+      map: map
+    });
+    calculateAndDisplayRoute(directionsService, directionsDisplay, warehouseAddress, shippingAddress, map);
+
+    bounds.extend(warehouseAddress);
+    bounds.extend(shippingAddress);
+
+    // show driver position
+    if (driverLocation) {
+      var marker = new google.maps.Marker({
+        draggable: false,
+        position: driverLocation,
+        map: map,
+        label: 'Driver',
+        animation: google.maps.Animation.DROP,
+        title: ''
+      });
+      bounds.extend(driverLocation);
+    }
+
+    if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+      var extendPoint = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+      bounds.extend(extendPoint);
+    }
+
+    map.fitBounds(bounds)
+  }
+
+  function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB, map) {
+    directionsService.route({
+      origin: pointA,
+      destination: pointB,
+      travelMode: google.maps.TravelMode.DRIVING
+    }, function(response, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+      } else {
+        var deliveryPath = new google.maps.Polyline({
+          path: [
+            {lat: 36.85341604753753, lng: 10.176080866332995},
+            {lat: 36.86341604753754, lng: 10.176080866332995}
+          ],
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        deliveryPath.setMap(map);
+      }
+    });
+  }
+  initializeMap();
+</script>

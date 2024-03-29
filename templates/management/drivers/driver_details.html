@@ -1,0 +1,26 @@
+{% extends "management/base.html" %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+		<div class="row">
+			<div class="col-12">
+				{% include "management/drivers/includes/_driver_card.html" %}
+			</div>
+			<div class="col-12 mt-1">
+				<form method="post" action="{% url 'management:driver-status' pk=driver.pk %}">
+					{% csrf_token %}
+					{{ form }}
+					{% if not user.is_impersonate %}
+						<button type="submit" class="btn {% if driver.is_active %}btn-secondary{% else %}btn-success{% endif %}">
+							{% if driver.is_active %}Disable{% else %}Enable{% endif %}
+						</button>
+					{% endif %}
+					{% if driver.is_active %}
+						<a href="{% url 'management:driver-edit' pk=driver.pk %}" class="btn btn-success">Edit</a>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}

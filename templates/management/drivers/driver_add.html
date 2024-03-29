@@ -1,0 +1,29 @@
+{% extends "management/base.html" %}
+
+{% load bootstrap4 %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+		<div class="row justify-content-md-center">
+			<div class="col-12">
+				<div class="card raised-card {% if not forloop.first %}mt-3{% endif %}">
+					<div class="card-header">
+						<strong>New driver</strong>
+					</div>
+					<div class="card-body">
+						<form action="{% url 'management:driver-add' %}" method="post">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							{% buttons %}
+								{% if not user.is_impersonate %}
+									<button type="submit" class="btn btn-primary">Create</button>
+								{% endif %}
+							{% endbuttons %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}

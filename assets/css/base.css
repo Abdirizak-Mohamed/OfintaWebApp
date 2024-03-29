@@ -1,0 +1,291 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font-size: .875rem;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px; /* Height of navbar */
+  height: calc(100vh - 60px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  font-weight: 800;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+}
+
+/*
+ * Orders
+ */
+.order-map,
+.orders-map,
+.drivers-map {
+  width: 100%;
+  height: 500px;
+}
+
+.orders-table thead,
+.drivers-table thead,
+.warehouses-table thead,
+.managers-table thead {
+  cursor: pointer;
+}
+
+.orders-table td,
+.drivers-table td,
+.warehouses-table td,
+.managers-table td,
+.orders-table th,
+.drivers-table th,
+.warehouses-table th,
+.managers-table th {
+  border-top: none !important;
+}
+
+.form-control.has-error {
+	border-color:red;
+}
+
+/*
+ * Chat
+ */
+#chat {
+  height: 95%;
+}
+#chat .card {
+  height: 100%;
+}
+#chat .card-body {
+  height: 100%;
+}
+
+.user-image {
+  background-color: #ccc;
+  padding: 2px;
+}
+
+/*
+ * Misc
+ */
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #000;
+  border-radius: 50%;
+  display: inline-block;
+}
+.red-dot {
+  background-color: #ff0000;
+}
+.green-dot {
+  background-color: #008000;
+}
+
+/*
+ * Helpers
+ */
+.text-white {
+  color: #fff !important;
+}
+.text-black {
+  color: #000 !important;
+}
+.text-red {
+  color: #ff0000 !important;
+}
+
+.bg-white {
+  background-color: #fff !important;
+}
+.bg-light-themme {
+  background-color: #f8fcff !important;
+}
+.bg-dark-theme {
+  background-color: #44525c !important;
+}
+
+.gradient-dark {
+  background: linear-gradient(to bottom, #424f58 0%,#44525c 100%);
+}
+.gradient-light {
+  background: linear-gradient(to bottom, #fbfbfb 0%, #eff2f4 2%, #e7ecef 4%, #ebf0f3 22%, #eef4f7 30%, #f8fcff 100%);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.m-t-5 {
+  margin-top: 5px;
+}
+.m-t-10 {
+  margin-top: 10px;
+}
+.m-t-50 {
+  margin-top: 50px;
+}
+.m-r-5 {
+  margin-right: 5px;
+}
+.m-r-10 {
+  margin-right: 10px;
+}
+.m-r-20 {
+  margin-right: 20px;
+}
+.m-r-30 {
+  margin-right: 30px;
+}
+.m-l-5 {
+  margin-left: 5px;
+}
+.m-l-10 {
+  margin-left: 10px;
+}
+.m-l-20 {
+  margin-left: 20px;
+}
+.m-l-30 {
+  margin-left: 30px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+.m-b-20 {
+  margin-bottom: 20px;
+}
+.m-b-30 {
+  margin-bottom: 30px;
+}
+.m-b-40 {
+  margin-bottom: 40px;
+}
+
+.p-l-0 {
+  padding-left: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+.no-margin {
+  padding: 0 !important;
+}
+
+.raised-card {
+  -webkit-box-shadow: 0px 0px 7px 1px rgba(221,221,221,1);
+  -moz-box-shadow: 0px 0px 7px 1px rgba(221,221,221,1);
+  box-shadow: 0px 0px 7px 1px rgba(221,221,221,1);
+  border-radius: 10px !important;
+}
+
+/*
+ * Utilities
+ */
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+.text-bold { font-weight: 800; }
+
+.flex-grow {
+  flex: 1 0 auto;
+}
+
+/*
+ * Form styles
+ */
+.field-error {
+  font-style: italic;
+  color: #ff0000;
+}
+
+/**
+  Fine uploader
+ */
+.qq-upload-list li.qq-upload-success {
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+.qq-upload-list li {
+  padding: 0 !important;
+}
+
+.qq-upload-button {
+  width: auto !important;
+  color: #212529 !important;
+  background-color: rgb(248, 249, 250) !important;
+  border-color: rgb(248, 249, 250) !important;
+}
+.qq-upload-button:hover {
+  background-color: #e2e6ea !important;
+  border-color: #dae0e5 !important;
+}
+
+/**
+  Price list
+ */
+#pricelist-edit-modal .modal-dialog {
+  max-width: 800px;
+}
+
+#pricelist-search-modal .modal-dialog {
+  max-width: 800px;
+}

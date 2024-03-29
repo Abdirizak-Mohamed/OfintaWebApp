@@ -1,0 +1,17 @@
+{% load bootstrap4 %}
+
+
+<div class="row header-row">
+	<div class="col-2"><strong>ID</strong></div>
+	<div class="col-3"><strong>Name</strong></div>
+	<div class="col-2"><strong>Price</strong></div>
+	<div class="col-2"><strong>Image</strong></div>
+	<div class="col-2"></div>
+	<div class="col-12"><hr></div>
+</div>
+
+{% for pricelist_item in pricelist_items %}
+	{% include "management/pricelist/includes/_pricelist_item.html" %}
+{% empty %}
+	<i>Currently there are no price list items</i>
+{% endfor %}

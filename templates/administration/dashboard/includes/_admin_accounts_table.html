@@ -1,0 +1,20 @@
+<div class="table-responsive">
+	<table class="table table-sm table-bordered table-condensed">
+		<thead class="thead-light">
+		<tr>
+			<th scope="col">Full name</th>
+			<th scope="col">Email</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for admin_account in admin_accounts %}
+			<tr>
+				<td><a href="{% url 'administration:admin-account-details' admin_account.pk %}">{{ admin_account.first_name }} {{ admin_account.last_name }}</a></td>
+				<td>{{ admin_account.email }}</td>
+			</tr>
+		{% empty %}
+			<td colspan="5"><i>Currently there are no active shop accounts</i></td>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>

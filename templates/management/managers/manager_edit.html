@@ -1,0 +1,29 @@
+{% extends "management/base.html" %}
+
+{% load bootstrap4 %}
+
+
+{% block main_content %}
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 col-xl-10 px-4">
+		<div class="row justify-content-md-center">
+			<div class="col-12">
+				<div class="card raised-card mt-3">
+					<div class="card-header">
+						<a href="{% url 'management:manager-details' manager.pk %}"><strong>{{ manager }}</strong></a>
+					</div>
+					<div class="card-body">
+						<form action="{% url 'management:manager-edit' pk=manager.pk %}" method="post">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							{% buttons %}
+								{% if not user.is_impersonate %}
+									<button type="submit" class="btn btn-primary">Save</button>
+								{% endif %}
+							{% endbuttons %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock main_content %}

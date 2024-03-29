@@ -1,0 +1,23 @@
+<div class="card raised-card {% if not forloop.first %}mt-3{% endif %}">
+	<div class="card-header">
+		<div class="row">
+			<div class="col">
+				<a href="{% url 'administration:admin-account-details' admin_account.pk %}"><strong>{{ admin_account }}</strong></a>
+			</div>
+			<div class="col text-right">
+				<strong>Active:</strong> {{ admin_account.is_active }}
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-6">
+				<div><strong>First name:</strong> {{ admin_account.first_name }}</div>
+				<div><strong>Last name:</strong> {{ admin_account.last_name }}</div>
+			</div>
+			<div class="col-6">
+				<div><strong>Email:</strong> {{ admin_account.email }}</div>
+			</div>
+		</div>
+	</div>
+</div>
