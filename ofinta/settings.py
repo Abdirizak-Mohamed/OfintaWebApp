@@ -122,7 +122,7 @@ IMPERSONATE = {
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://tcv:T2ngrfpk@localhost:5432/ofintadb',
+        default='postgres://ofintauser:Br86Q5UKP8cQvIYjURTuqaY9GNJyocgj@dpg-co33rto21fec738raqr0-a/ofintadb',
         conn_max_age=600
     )
 }
